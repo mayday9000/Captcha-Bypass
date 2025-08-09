@@ -1,8 +1,10 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
+// at top of index.js
+require('dotenv').config();
 const ac = require("@antiadmin/anticaptchaofficial");
-ac.setAPIKey('a725f7ff819271ff5cfa6bf229dbad75');
+ac.setAPIKey(process.env.ANTICAPTCHA_API_KEY);
 const fs = require('fs');
 
 const url = 'https://www.google.com/recaptcha/api2/demo';
@@ -38,5 +40,6 @@ async function run() {
     await page.goto(url);
     completeCaptcha(page);
 }
+
 
 run();
